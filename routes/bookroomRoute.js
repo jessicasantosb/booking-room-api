@@ -69,4 +69,15 @@ router.post('/bookroom', async (req, res) => {
   }
 });
 
+router.post('/getbookingsbyuserid', async (req, res) => {
+  const userid = req.body.userid;
+  
+  try {
+    const userBookings = await BookroomModel.find({ userid: userid });
+    res.send(userBookings);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
 export default router;
