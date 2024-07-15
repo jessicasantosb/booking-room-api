@@ -5,14 +5,14 @@ import User from '../models/user.js';
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const notHashedPassword = req.body.password;
+  const notHashedPassword = req.body.passwordValue;
   const salt = bcrypt.genSaltSync(10);
-  req.body.password = bcrypt.hashSync(notHashedPassword, salt);
+  req.body.passwordValue = bcrypt.hashSync(notHashedPassword, salt);
 
   const newuser = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: req.body.passwordValue,
   });
 
   try {

@@ -55,20 +55,8 @@ router.post('/createroom', async (req, res) => {
       imageurls: [imageurl1, imageurl2, imageurl3],
       currentbookings: [],
       description: description,
-    });
-
-    console.log(
-      name,
-      rentPerDay,
-      maxCount,
-      phoneNumber,
-      type,
-      imageurl1,
-      imageurl2,
-      imageurl3,
-      description
-    );
-
+    })
+    
     await newroom.save();
     res.send('Room registered successfully');
   } catch (error) {
