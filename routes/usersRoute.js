@@ -24,11 +24,11 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
+  const { emailValue, passwordValue } = req.body;
+  
   try {
-    const user = await User.findOne({ email: email });
-    const passwordOk = user && bcrypt.compareSync(password, user.password);
+    const user = await User.findOne({ email: emailValue });
+    const passwordOk = user && bcrypt.compareSync(passwordValue, user.password);
 
     if (passwordOk) {
       res.send(user);
