@@ -5,7 +5,7 @@ import Users from '../models/user.js';
 
 const router = express.Router();
 
-router.get('/getallbookings', async (req, res) => {
+router.get('/bookings', async (req, res) => {
   try {
     const bookings = await Bookings.find({});
     res.send(bookings);
@@ -14,7 +14,7 @@ router.get('/getallbookings', async (req, res) => {
   }
 });
 
-router.get('/getallrooms', async (req, res) => {
+router.get('/rooms', async (req, res) => {
   try {
     const rooms = await Rooms.find({});
     res.send(rooms);
@@ -23,7 +23,7 @@ router.get('/getallrooms', async (req, res) => {
   }
 });
 
-router.get('/getallusers', async (req, res) => {
+router.get('/users', async (req, res) => {
   try {
     const users = await Users.find({});
     res.send(users);
@@ -32,7 +32,7 @@ router.get('/getallusers', async (req, res) => {
   }
 });
 
-router.post('/createroom', async (req, res) => {
+router.post('/room', async (req, res) => {
   const {
     name,
     rentPerDay,

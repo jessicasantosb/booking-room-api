@@ -3,7 +3,7 @@ import Room from '../models/rooms.js';
 
 const router = express.Router();
 
-router.get('/getallrooms', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const rooms = await Room.find({});
     res.send(rooms);
@@ -12,8 +12,8 @@ router.get('/getallrooms', async (req, res) => {
   }
 });
 
-router.post('/getroombyid', async (req, res) => {
-  const roomid = req.body.roomid
+router.get('/:roomid', async (req, res) => {
+  const roomid = req.params.roomid
   
   try {
     const room = await Room.findOne({_id: roomid});

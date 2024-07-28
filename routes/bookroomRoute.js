@@ -7,7 +7,7 @@ import Rooms from '../models/rooms.js';
 const stripe = new Stripe(process.env.STRIPE_KEY);
 const router = express.Router();
 
-router.post('/bookroom', async (req, res) => {
+router.post('/', async (req, res) => {
   const {
     room,
     roomid,
@@ -65,12 +65,12 @@ router.post('/bookroom', async (req, res) => {
 
     res.send('Payment has been made. Room booked successfully.');
   } catch (error) {
-    console.error(error);
+    return res.status(400).json({ message: error });
   }
 });
 
-router.post('/getbookingsbyuserid', async (req, res) => {
-  const userid = req.body.userid;
+router.get('/:userid', async (req, res) => {
+  const userid = req.params.userid;
 
   try {
     const userBookings = await BookroomModel.find({ userid: userid });
@@ -80,8 +80,8 @@ router.post('/getbookingsbyuserid', async (req, res) => {
   }
 });
 
-router.post('/cancelbooking', async (req, res) => {
-  const { bookingid, roomid } = req.body;
+router.put('/:roomid/:bookingid', async (req, res) => {
+  const { roomid, bookingid } = req.params;
 
   try {
     const bookingItem = await BookroomModel.findOne({
@@ -96,14 +96,13 @@ router.post('/cancelbooking', async (req, res) => {
     const tempbookings = bookings.filter(
       (booking) => booking.bookingid.toString() !== bookingid
     );
-    
+
     room.currentbookings = tempbookings;
-    await room.save()
+    await room.save();
 
-    res.send('Room booked successfully deleted.');
-
+    res.send('Book successfully canceled.');
   } catch (error) {
-    return res.send(400).json({error});
+    return res.send(400).json({ error });
   }
 });
 
