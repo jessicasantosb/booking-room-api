@@ -3,7 +3,7 @@
 Esta API fornece endpoints para gerenciar usuários e reservas de quartos. Ela permite que você registre e faça login de usuários, crie, leia e cancele reservas, e permite que o administrador adicione quartos.
 
 ## Endpoints
-Você pode visualizar a API em [Live Preview](https://booking-room-jessicasantosb.vercel.app/)
+Você pode visualizar a API em [Live Preview](https://booking-room-backend.vercel.app/)
 
 ### **POST /api/users/register**
 - **Descrição**: Cria um usuário.
