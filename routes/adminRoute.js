@@ -55,12 +55,26 @@ router.post('/room', async (req, res) => {
       imageurls: [imageurl1, imageurl2, imageurl3],
       currentbookings: [],
       description: description,
-    })
-    
+    });
+
     await newroom.save();
     res.send('Room registered successfully');
   } catch (error) {
     return res.status(400).json({ error });
   }
 });
+
+router.put('/:userid', async (req, res) => {
+  const { userid } = req.params;
+  
+  try {
+    const userItem = await Users.findOne({ _id: userid });
+    userItem.isAdmin = true;
+    await userItem.save();
+    res.send(userItem)
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
 export default router;
