@@ -63,9 +63,20 @@ router.post('/google-login', async (req, res) => {
     audience: process.env.GOOGLE_CLIENT_ID,
   });
 
-  const { name, email, picture } = ticket.getPayload();
-  upsert(users, { name, email, picture });
-  res.status(201).json({ name, email, picture });
+  const { name, email } = ticket.getPayload();
+  upsert(users, { name, email });
+  const user = await User.findOne({ email: email });
+
+  if (user) {
+    res.status(201).send(user);
+  } else {
+    const newuser = new User({
+      name: name,
+      email: email,
+    });
+    await newuser.save();
+    res.status(201).send(newuser);
+  }
 });
 
 export default router;
