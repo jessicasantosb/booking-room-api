@@ -2,13 +2,23 @@
 
 Esta API fornece endpoints para gerenciar usuários e reservas de quartos. Ela permite que você registre e faça login de usuários, crie, leia e cancele reservas, e permite que o administrador adicione quartos.
 
+## Getting Started
+Para começar no Booking Room API, siga estes passos:
+
+1. Clonar o repositório: **`git clone https://github.com/jessicasantosb/booking-room-api.git`**
+2. Entrar na pasta do projeto: **`cd booking-room`**
+3. Instalar as dependências: **`yarn`**
+4. Iniciar o aplicativo: **`yarn dev`**
+
 ## Endpoints
 Você pode visualizar a API em [Live Preview](https://booking-room-backend.vercel.app/)
 
 ### **POST /api/users/register**
 - **Descrição**: Cria um usuário.
 ### **POST /api/users/login**
-- **Descrição**: Retorna o login de um usuários.
+- **Descrição**: Retorna o login de um usuário.
+### **POST /api/users/google-login**
+- **Descrição**: Retorna o login com o Google de um usuário.
 
 ### **GET /api/rooms**
 - **Descrição**: Retorna uma lista de todos os quartos.
@@ -30,6 +40,8 @@ Você pode visualizar a API em [Live Preview](https://booking-room-backend.verce
 - **Descrição**: Retorna uma lista de todos os usuários.
 ### **POST /api/admin/room**
 - **Descrição**: Retorna o registro de um quarto.
+### **PUT /api/admin/:userid**
+- **Descrição**: Atualiza o status de um usuário para se tornar administrador.
 
 ## Technology Stack
 
@@ -37,6 +49,7 @@ Você pode visualizar a API em [Live Preview](https://booking-room-backend.verce
 - MongoDB
 - Bcrypt
 - Stripe
+- Google Auth Library
 
 ## Author
 
