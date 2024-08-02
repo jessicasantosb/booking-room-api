@@ -1,7 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import Room from '../models/rooms.js';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {
@@ -13,10 +13,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:roomid', async (req, res) => {
-  const roomid = req.params.roomid
-  
+  const roomid = req.params.roomid;
+
   try {
-    const room = await Room.findOne({_id: roomid});
+    const room = await Room.findOne({ _id: roomid });
     res.send(room);
   } catch (error) {
     return res.status(400).json({ message: error });

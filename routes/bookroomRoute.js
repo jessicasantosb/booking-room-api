@@ -1,11 +1,11 @@
-import express from 'express';
+import { Router } from 'express';
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';
 import BookroomModel from '../models/bookroom.js';
 import Rooms from '../models/rooms.js';
 
 const stripe = new Stripe(process.env.STRIPE_KEY);
-const router = express.Router();
+const router = Router();
 
 router.post('/', async (req, res) => {
   const {

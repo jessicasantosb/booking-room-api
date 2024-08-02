@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
-import express from 'express';
+import { Router } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import User from '../models/user.js';
 
-const router = express.Router();
+const router = Router();
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 

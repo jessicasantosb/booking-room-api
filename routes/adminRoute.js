@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 import Bookings from '../models/bookroom.js';
 import Rooms from '../models/rooms.js';
 import Users from '../models/user.js';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/bookings', async (req, res) => {
   try {
@@ -66,12 +66,12 @@ router.post('/room', async (req, res) => {
 
 router.put('/:userid', async (req, res) => {
   const { userid } = req.params;
-  
+
   try {
     const userItem = await Users.findOne({ _id: userid });
     userItem.isAdmin = true;
     await userItem.save();
-    res.send(userItem)
+    res.send(userItem);
   } catch (error) {
     return res.status(400).json({ error });
   }
