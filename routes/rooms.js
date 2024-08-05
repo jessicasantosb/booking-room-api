@@ -23,4 +23,4 @@ router.get('/:roomid', async (req, res) => {
   }
 });
 
-export default router;
+export { router };

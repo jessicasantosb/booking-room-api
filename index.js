@@ -1,18 +1,15 @@
-import dbConfig from './mongoConect.js'
+import dbConfig from './mongoConect.js';
 import 'dotenv/config';
-import express from 'express'
-import roomsRoute from './routes/roomsRoute.js';
-import usersRoute from './routes/usersRoute.js';
-import bookroomRoute from './routes/bookroomRoute.js';
-import adminRoute from './routes/adminRoute.js';
+import express from 'express';
+import { admin, bookroom, rooms, users } from './routes/index.js';
 
 const app = express();
 
-app.use(express.json())
-app.use('/api/rooms', roomsRoute)
-app.use('/api/users', usersRoute)
-app.use('/api/books', bookroomRoute);
-app.use('/api/admin', adminRoute);
+app.use(express.json());
+app.use('/api/rooms', rooms.router);
+app.use('/api/users', users.router);
+app.use('/api/books', bookroom.router);
+app.use('/api/admin', admin.router);
 
 const port = process.env.PORT || 8000;
 

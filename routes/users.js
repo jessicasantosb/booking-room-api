@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
     await newUser.save();
     return res.status(201).json('User registered successfully');
   } catch (error) {
-    return res.status(401).json(error);
+    return res.status(400).json(error);
   }
 });
 
@@ -41,11 +41,12 @@ router.post('/login', async (req, res) => {
 
   try {
     const user = await User.findOne({ email: email });
-    const passwordOk = (await user) && bcrypt.compare(password, user.password);
+    const passwordOk = user && bcrypt.compare(password, user.password);
 
     if (passwordOk) return res.status(200).json(user);
+    return res.status(400).json({ error });
   } catch (error) {
-    return res.status(401).json({ error });
+    return res.status(400).json({ error });
   }
 });
 
@@ -72,4 +73,4 @@ router.post('/google-login', async (req, res) => {
   return res.status(201).json(newuser);
 });
 
-export default router;
+export { router };
