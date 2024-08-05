@@ -20,38 +20,32 @@ function upsert(array, item) {
 }
 
 router.post('/register', async (req, res) => {
-  const notHashedPassword = req.body.passwordValue;
-  const salt = bcrypt.genSaltSync(10);
-  req.body.passwordValue = bcrypt.hashSync(notHashedPassword, salt);
-
-  const newuser = new User({
-    name: req.body.nameValue,
-    email: req.body.emailValue,
-    password: req.body.passwordValue,
+  const { password } = req.body;
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  const newUser = new User({
+    ...req.body,
+    password: hashedPassword,
   });
 
   try {
-    await newuser.save();
-    res.send('User registered successfully');
+    await newUser.save();
+    return res.status(201).json('User registered successfully');
   } catch (error) {
-    return res.status(400).json(error);
+    return res.status(401).json(error);
   }
 });
 
 router.post('/login', async (req, res) => {
-  const { emailValue, passwordValue } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email: emailValue });
-    const passwordOk = user && bcrypt.compareSync(passwordValue, user.password);
+    const user = await User.findOne({ email: email });
+    const passwordOk = (await user) && bcrypt.compare(password, user.password);
 
-    if (passwordOk) {
-      res.send(user);
-    } else {
-      return res.status(400).json({ message: 'Login failed' });
-    }
+    if (passwordOk) return res.status(200).json(user);
   } catch (error) {
-    return res.status(400).json({ error });
+    return res.status(401).json({ error });
   }
 });
 
@@ -67,16 +61,15 @@ router.post('/google-login', async (req, res) => {
   upsert(users, { name, email });
   const user = await User.findOne({ email: email });
 
-  if (user) {
-    res.status(201).send(user);
-  } else {
-    const newuser = new User({
-      name: name,
-      email: email,
-    });
-    await newuser.save();
-    res.status(201).send(newuser);
-  }
+  if (user) return res.status(201).json(user);
+
+  const newuser = new User({
+    name,
+    email,
+  });
+
+  await newuser.save();
+  return res.status(201).json(newuser);
 });
 
 export default router;

@@ -6,7 +6,7 @@ Esta API fornece endpoints para gerenciar usuários e reservas de quartos. Ela p
 Para começar no Booking Room API, siga estes passos:
 
 1. Clonar o repositório: **`git clone https://github.com/jessicasantosb/booking-room-api.git`**
-2. Entrar na pasta do projeto: **`cd booking-room`**
+2. Entrar na pasta do projeto: **`cd booking-room-api`**
 3. Instalar as dependências: **`yarn`**
 4. Iniciar o aplicativo: **`yarn dev`**
 
