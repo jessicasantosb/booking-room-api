@@ -8,10 +8,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/api/rooms', rooms.router);
-app.use('/api/users', users.router);
-app.use('/api/books', bookroom.router);
-app.use('/api/admin', admin.router);
+app.use('/rooms', rooms.router);
+app.use('/users', users.router);
+app.use('/books', bookroom.router);
+app.use('/admin', admin.router);
 
 const port = process.env.PORT || 8000;
 
