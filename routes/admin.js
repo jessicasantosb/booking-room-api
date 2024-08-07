@@ -68,7 +68,8 @@ router.delete('/:roomid', async (req, res) => {
   const { roomid } = req.params;
 
   try {
-    await Rooms.deleteOne({ _id: roomid });
+    await Rooms.findByIdAndDelete({_id: roomid});
+    
     return res.status(200).json('Room deleted successfully');
   } catch (error) {
     return res.status(400).json({ error });
