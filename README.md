@@ -11,7 +11,7 @@ Para começar no Booking Room API, siga estes passos:
 4. Iniciar o aplicativo: **`yarn dev`**
 
 ## Endpoints
-Você pode visualizar a API em [Live Preview](https://booking-room-backend.vercel.app/)
+Você pode visualizar a API em [Live Preview](https://booking-room-api-99ca.onrender.com/)
 
 ### **POST /api/users/register**
 - **Descrição**: Cria um usuário.
